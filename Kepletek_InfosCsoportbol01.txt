@@ -1,0 +1,259 @@
+olvass be egy adatbázist:  input = data.frame(adatbazis)
+olvass be egy txt-t:	   input = read.table("nev.txt", header = TRUE)
+                           attach(input)
+olvass be egy csv-t:	   input = read.csv2("nev.csv")
+
+ha van egy nullhipotézisünk, az akkor teljesül, ha p nagyobb, mint a szignifikancia szint
+
+szabadsági fok: df
+------------------------------------------------------------------
+
+Függetlenségvizsgálat:
+
+táblázat: tablazat = table(egyik oszlop, masik oszlop)
+eloszlásos izé táblázat: izetablazat = prop.table(tablazat, 1vagy2(attól függően h oszlop vagy sor szerint))
+összegek hozzáírása, kiíratás: addmargins(tablazat)
+sorok összege: margin.table(tablazat, 1)
+oszlopok összege: margin.table(tablazat, 2)
+össz elem összege: margin.table(tablazat)
+[várt gyakoriságok]: (sorösszeg*oszlopösszeg) / össz elem összege)
+
+eloszlás: 
+	diszkrét: pár egyszerű értéket vesz fel
+	folytonos: valós bullshit értékeket vesz fel
+	normál: qqnorm(valtozo) szép vonalat csinál
+
+teszteljük a függetlenségeket:
+- 2 diszkrét:
+	library(MASS)
+	input = data.frame(survey)
+	attach(input)
+	gyak.tablazat = table(Smoke,Exer) --> ha valamelyik SUM kisebb mint X(random szám amit ad) akkor lehet nem megbizható --> fisher.test(gyak.tablazat): p-érték hasonló a kapotthoz, akkor megbízható
+	gyak.fuggetlen = margin.table(gyak.tablazat, 1) %*% t(margin.table(gyak.tablazat, 2)) / margin.table(gyak.tablazat)  --> várt gyakoriságok
+	summary(gyak.tablazat)
+
+	p-értéket nézzük: ha nagyobb, FÜGGETLENSÉG
+
+	/////////////////////////////////////////////////////
+	ha aggregált adatok szerepelnek: 
+		d = data.frame(UCBAdmissions)
+		(gyak.tablazat = xtabs(oszlop, amely adatait össze akarjuk számolni ~ egyik oszlop + masik oszlop, data = d))
+		chisq.test(gyak.tablazat, correct = FALSE)
+
+- diszkrét és normál:
+	leveneTest(normál változó ~ factor(diszkrét változó), center = mean) 
+		--> kisebbnek kell lennie, mint a szignifikancia szint
+	oneway.test(normál ~ factor(diszkrét), var.equal = FALSE)
+
+	p-értékét nézzük: ha nagyobb, FÜGGETLENSÉG
+- normál és normál:
+	A két változó korrelálatlan (nincs köztük lineáris kapcsolat)
+	cor.test(salbegin, salary, method = "pearson", conf.level = 0.95)
+	
+	cor alatti érték (korreláció értéke): nagy pozitív - erős növekvő, nagy negatív - erős csökkenő
+
+	p-értéket nézzük: ha nagyobb, nincs köztük lineáris kapcsolat
+	
+
+
+------------------------------------------------------------------
+
+Regresszió:
+
+(XXX) vizsgáljuk cucc1 és cucc2 közötti kapcsolatot. 
+	
+	
+	
+	- hány százalékban magyaráz cucc2 hány százalékban magyarázza cucc1-et? (LINEÁRIS)
+		
+		cor.test(cucc1 ~ cucc2, method = "pearson") --> ha cor jó nagy akkor megyünk tovább	
+		model = lm(cucc1 ~ cucc2)
+		summary(model)
+
+		R-squared --> százalékba
+
+		f = function(x) a+b*x
+	
+	- írjuk fel cucc1-et cucc2 exponenciális függvényeként:
+		model = lm(log(cucc1) ~ cucc2)
+		a = model$coefficient[1]  --> tengelymetszet becslése
+		b = model$coefficient[2]   --> meredekség becslése
+		f = function(x) exp(a+b*x)
+		summary(model) 
+		
+		- mi lesz a függvényérték f(randomszám) esetén?
+			f(randomszám)
+		
+		- hány százalékban magyarázza....  --> R-squared
+
+	-adjuk meg az egyenes meredekségének/tengelymetszetének becslését! (LINEÁRIS)
+		
+		cor.test(cucc1 ~ cucc2, method = "pearson") --> ha cor jó nagy akkor megyünk tovább	
+		model = lm(Ozone ~ Temp)
+		a = model$coefficient[1]  --> tengelymetszet becslése
+		b = model$coefficient[2]   --> meredekség becslése
+	
+	-adjuk meg az egyenes meredekségének/tengelymetszetének becslését! (EXPONENCIÁLIS)
+
+		cor.test(cucc1 ~ cucc2, method = "pearson") --> ha cor jó nagy akkor megyünk tovább	
+		
+	
+
+
+------------------------------------------------------------------
+
+
+Főkomponens:
+dimenziócsökkentésre
+1) hány korrelálatlan változóval jellemezhető az adatbázis legfeljebb X százalékos információvesztés mellett?
+	model = princomp(~ oszlop1 + oszlop2 + ... + oszlopn, cor = TRUE)
+			vagy: (input[1:n], cor = true)
+	[FONTOS: Neveket/szövegeket, pl. autómárkát tartalmazó oszlopokat nem szabad belevenni]
+
+	summary(model)
+
+	Cumulative Proportion:	az első oszlop balról amelyikn nagyobb mint 1-X --> annyi változó
+
+
+2) hány százalékos az információvesztés, ha az utolsó 2 főkomponenst elhagyjuk?
+	model = princomp(~ oszlop1 + oszlop2 + ... + oszlopn, cor = TRUE)
+	summary(model)
+
+	Cumulative Proportion: elhagyunk 2 oszlopot jobbról, a következőt kivonjuk 1-ből 
+	és átalakítunk %-ra (0.0671212 = 6.71%)
+
+3) Dimenziócsökkentés során hogyan áll elõ a legfontosabb új változó az eredeti változók lineáris
+   kombinációjaként? Három tizedes jegyre kerekítve adjuk meg az Air.Flow változó együtthatóját.
+	model = princomp(~ Air.Flow + Water.Temp + Acid.Conc. + stack.loss, cor = TRUE)
+	(load = loadings(model))
+	
+	Loadings:
+			Comp.1 (első a legfontosabb)	
+	Air.Flow 	-0.547 --> megoldás
+------------------------------------------------------------------
+
+Diszkriminancia-analízis
+
+LD1 - x koordináta (első dimenzió)
+LD2 - y koordináta (második dimenzió)
+
+Valami szerint szeretnénk megjósolni valami valószínűségét. Térjünk át új koordinátarendszerre, ahol jól szétválnak a csoportok. Adjuk meg az első megfigyelés X koordinátáját!
+
+	model = lda(Faj oszlop ~ egyik vizsgált oszlop + másik vizsgált oszlop)
+	pred = data.frame(predict(model))
+	
+	a kapott táblázatban nézzük az első sor LD1-nél lévő értékét
+
+Valami szerint (oszlop1, oszlop2) szeretnénk megjósolni valaminek a valószínűségét (Kategorianev = kategoria1, kategoria2, kategoria3). Várhatóan melyik csoportba fog tartozni az a jelentkező, akinek oszlop1=egyszám és oszlop2=másikszám?
+	
+	input = read.csv("admission.csv")
+	input2 = read.csv("alk.csv") --> ezt mi hozzuk létre: oszlop1nev,oszlop2nev
+							      egyszam,masikszam
+
+	model = lda(Kategorianev ~ oszlop1 + oszlop2)
+	pred = data.frame(predict(model, input2)) --> a táblában megnézzük, melyik kategoriába került
+	
+	PÉLDA:
+	Az admission adatbázisban található GPA és GMAT pontszámok alapján szeretnénk megjósolni a főiskolára 		való bekerülés valószínűségét (De = admit, notadmit, borderline).Soroljuk be a jelentkezőket az 	„admit”, „notadmit”, vagy „borderline” kategóriák valamelyikébe. Várhatóan melyik csoportba fog 	tartozni az a jelentkező, akinek a következő pontszámai vannak: GPA=3.21, GMAT=497?
+
+	input = read.csv("admission.csv")
+	input2 = read.csv("alk.csv")
+
+	model = lda(De ~ GPA + GMAT)
+	pred = data.frame(predict(model, input2))
+
+
+Valami szerint (oszlop1, oszlop2) szeretnénk megjósolni valaminek a valószínűségét (Kategorianev = kategoria1, kategoria2, kategoria3). Mekkora valószínűséggel kerül a modell által besorolt csoportba az az egyed, akinek
+oszlop1=egyikszám, oszlop2=másikszám?
+	
+	input = read.csv("admission.csv")
+	input2 = read.csv("alk.csv") --> ezt mi hozzuk létre: oszlop1nev,oszlop2nev
+							      egyszam,masikszam
+
+	model = lda(Kategorianev ~ oszlop1 + oszlop2)
+	pred = data.frame(predict(model, input2)) --> a táblában megnézzük, melyik kategórába sorolódott,
+						      és a kategória alatti értéket
+
+Valami szerint (oszlop1, oszlop2) szeretnénk megjósolni valaminek a valószínűségét (Kategorianev = kategoria1, kategoria2, kategoria3). Az esetek hány százalékában működött jól az algoritmus?
+	
+	model = lda(Kategorianev ~ oszlop1 + oszlop2)
+	pred = data.frame(predict(model))
+	mean(De == pred$class)
+
+
+Valami szerint (oszlop1, oszlop2) szeretnénk megjósolni valaminek a valószínűségét (Kategorianev = kategoria1, kategoria2, kategoria3). Térjünk át egy koordinátarendszerre ahol jól szétválnak a csoportok.
+Adjuk meg oszlop1 első dimenziójához tartozó együtthatójának abszolút értékét!
+
+	model = lda(De ~ oszlop1 + oszlop2)
+	model
+
+	Coefficients of linear discriminants-nál: oszlop1, LD1-hez tartozó érték
+
+----------------------------------------------------------------------------------------
+
+Klaszter-analízis
+
+A legközelebbi szomszéd módszernek (single-linkage) az az elõnye, hogy jól szeparált
+klaszterek alakulnak ki, de az a hátránya, hogy ezek a csoportok nagyon
+nagyok is lehetnek. A legtávolabbi szomszéd (complete linkage) módszer kevésbé szeparált, de kis méretû klasztereket eredményez.
+
+módszerek: k-közép módszer, hierarchikus módszerek
+hierarchikus módszerek:
+	agglomeratív: kezdetben minden megfigyelés önálló klasztert alkot és fokozatosan vonjuk össze
+		      az egymáshoz legközelebbi klasztereket
+	divizív: kezdetben minden megfigyelés egyetlen klaszterbe kerül, majd ezt a klasztert minden
+		 lehetséges módon felbontjuk két részre, és azt a felbontást tartjuk meg, ahol a klaszterek
+		 közötti távolság a legnagyobb.
+
+
+standardizálás: valtozo_st = scale(valtozo)
+
+klaszter-analízis:
+	tavolsagmatrix = dist(cbind(valt1_st, valt2_st, valt3_st))
+	model = hclust(tavolsagmatrix, method = "single") --> legközelebbi szomszéd
+
+model$height --> milyen távolságnál történtek a klaszterek összevonásai
+model$merge --> milyen sorrendben történt a klaszterek összevonása
+
+kirajzolás:
+	plot(model)
+	csoportok kimutatása: rect.hclust(model, csoportszám)
+
+
+Standardizáljuk a folytonos változókat, csoportosítsuk a cuccokat úgy hogy a folytonos változókból jól
+szeparált klasztrereket kapjunk. Az utolsó összevonás mekkora távolságnál történt?
+
+	folytonosvaltozo1_st = scale(folytonosvaltozo1)
+	folytonosvaltozo2_st = scale(folytonosvaltozo2)
+	folytonosvaltozo3_st = scale(folytonosvaltozo3)
+	tavolsagmatrix = dist(cbind(folytonosvaltozo1, folytonosvaltozo2, folytonosvaltozo3))
+	model = hclust(tavolsagmatrix, method = "single")
+	model$height --> az utolsót nézzük
+
+
+Standardizáljuk a folytonos változókat, csoportosítsuk a cuccokat úgy hogy a folytonos változókból jól
+szeparált klasztrereket kapjunk. X csoport kialakításával mekkora lesz az egyes csoportok elemszáma?
+
+	folytonosvaltozo1_st = scale(folytonosvaltozo1)
+	folytonosvaltozo2_st = scale(folytonosvaltozo2)
+	folytonosvaltozo3_st = scale(folytonosvaltozo3)
+	tavolsagmatrix = dist(cbind(folytonosvaltozo1, folytonosvaltozo2, folytonosvaltozo3))
+	model = hclust(tavolsagmatrix, method = "single")
+	plot(model)
+	rect.hclust(model, X) --> megszámoljuk a csoportokban levő elemeket
+
+Standardizáljuk a folytonos változókat, csoportosítsuk a cuccokat úgy hogy a folytonos változókból jól
+szeparált klasztrereket kapjunk. Az egymáshoz két legközelebbi cucc összevonása mekkora távolságnál történt?
+
+	model$height --> első szám (az a két legközelebbi cucc távolsága)
+
+
+
+legtávolabbi szomszéd módszer:
+model = hclust(tavolsagmatrix, method = "complete")
+
+átlagos távolság módszer: 
+model = hclust(tavolsagmatrix, method = "average")
+
+
+
