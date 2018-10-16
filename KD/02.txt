@@ -1,0 +1,245 @@
+
+1
+01020304050607080910
+
+
+
+1. 3 / 3 pont
+
+
+Mikor követünk el másodfajú hibát?
+
+(nincs válasz)
+
+
+Ha elutasítjuk az igaz nullhipotézist.
+
+
+Ha elutasítjuk a hamis nullhipotézist.
+Ha megtartjuk a hamis nullhipotézist.
+
+
+Ha megtartjuk az igaz nullhipotézist.
+
+
+Ha szignifikáns különbséget állapítunk meg.
+
+Helyes válasz:
+
+Ha megtartjuk a hamis nullhipotézist.
+
+
+2. 0 / 3 pont
+
+
+Az egyszempontos ANOVA nullhipotézise:
+
+(nincs válasz)
+
+
+A vizsgált változók szórása különbözõ.
+
+
+Minden várható érték azonos.
+
+
+A várható értékek között van legalább egy, ami különbözik a többitõl.
+
+
+A vizsgált változók szórása azonos.
+
+
+Minden várható érték különbözõ.
+
+Helyes válasz:
+
+Minden várható érték azonos.
+
+
+3. 5 / 5 pont
+
+
+Olvassuk be a „PlantGrowth” adatbázist a „datasets” csomagból. 10%-os szignifikancia szinten teszteljük azt a nullhipotézist, hogy a „weight” változó a „group” változó „trt1” csoportjában normális eloszlást követ.
+
+p > 0,10 , tehát feltételezhetjük, hogy a változó normális eloszlású.
+
+(nincs válasz)
+
+Egyik állítás sem igaz.
+
+Az elsõ állítás igaz, a második hamis.
+
+Az elsõ állítás hamis, a második igaz.
+
+Mindkét állítás igaz, de nincs összefüggés köztük.
+
+Mindkét állítás igaz és összefüggés van köztük.
+
+Helyes válasz:
+Mindkét állítás igaz és összefüggés van köztük.
+
+
+4. 3 / 3 pont
+
+
+Milyen próbát alkalmaz a férfiak és a nõk átlagos jövedelmének összehasonlítására? Feltételezzük, hogy az adott próba feltételei teljesülnek.
+
+(nincs válasz)
+
+
+kétmintás t-próbát
+
+
+egymintás Kolmogorov-Szmirnov-próbát
+
+
+egymintás t-próbát
+
+
+binomiális próbát
+
+
+páros t-próbát
+
+Helyes válasz:
+
+kétmintás t-próbát
+
+
+5. 5 / 5 pont
+
+
+Olvassuk be az „mtcars” adatbázist a „datasets” csomagból, mely 32 különbözõ autó jellemzõit tartalmazza. A „cyl” három értékû változó a hengerek számát adja meg (cyl == 4, 6, 8). 5%-os szignifikancia szinten teszteljük azt a nullhipotézist, hogy az „mpg” változó varianciája azonos a „cyl” változó szerinti csoportokban. Az alábbi állítások közül melyik igaz?
+
+(nincs válasz)
+
+
+p = 0,0047 < 6,4843, tehát elutasítjuk a varianciák azonosságára vonatkozó nullhipotézist.
+
+
+p < 0,001 < 0,05, tehát 5%-os szinten elutasítjuk a varianciák azonosságára vonatkozó nullhipotézist.
+
+
+p = 0,0047 < 0,05, tehát a varianciák azonosságára vonatkozó nullhipotézist nem tudjuk elutasítani 5%-os szignifikancia szinten.
+
+
+p = 0,0047 < 0,05, tehát a varianciák azonosságára vonatkozó nullhipotézist 5%-os szignifikancia szinten elutasítjuk.
+
+
+p < 0,001 < 0,05, tehát a varianciák azonosságára vonatkozó nullhipotézist nem tudjuk elutasítani 5%-os szignifikancia szinten.
+
+Helyes válasz:
+
+p = 0,0047 < 0,05, tehát a varianciák azonosságára vonatkozó nullhipotézist 5%-os szignifikancia szinten elutasítjuk.
+
+
+6. 0 / 5 pont
+
+
+2012-ben amerikai tizenévesek körében végeztek egy felmérést, hogy mi a kedvenc zenei stílusuk. Az eredmény: pop (20%), country (15%), rock (13%), keresztény (10%), hip hop és rap (7%), egyéb (35%). Az egyik rádiós zenecsatorna kíváncsi, hogy Magyarországon ugyanezen arányok tapasztalhatóak-e, ezért a honlapjukon végeznek egy felmérést. A következõ gyakoriságokat kapják: pop (150 fõ), country (30 fõ), rock (100 fõ), keresztény (10 fõ), hip hop és rap (80 fõ), egyéb (300 fõ). Teszteljük azt a nullhipotézist, hogy hazánkban a zenei stílusok kedveltsége megfelel az amerikai adatoknak.
+
+(nincs válasz)
+
+
+A próbastatisztika értéke nagy (kb. 143), ami magasabb, mint a szignifikancia szint, ezért a nullhipotézist elfogadjuk.
+
+
+A p-érték lényegében 0, ami a megbízhatósági szint alatt van, ezért a nullhipotézist elvetjük.
+
+
+A mintaméret túl alacsony, ezért nem tudunk megbízható döntést hozni.
+
+
+A p-érték lényegében 0, ami a szignifikancia szint alatt van, ezért a nullhipotézist elvetjük.
+
+Helyes válasz:
+
+A p-érték lényegében 0, ami a szignifikancia szint alatt van, ezért a nullhipotézist elvetjük.
+
+
+7. 0 / 5 pont
+
+
+Olvassuk be a „MASS” csomagból az „anorexia” adatbázist, mely anorexiás nõk testtömeg-adatait tartalmazza. 5%-os szignifikancia szinten teszteljük azt a nullhipotézist, hogy a „Prewt” változó várható értéke azonos a különbözõ kezelési csoportok esetén (Treat == Cont, CBT, FT). Tegyük fel, hogy a minták normális eloszlásból származnak, azonos varianciával. Az alábbi állítások közül melyik igaz?
+
+(nincs válasz)
+
+
+p = 0,5828, a nullhipotézist elutasítjuk.
+
+
+p = 0,5828, a nullhipotézist nem tudjuk elutasítani.
+
+
+p = 0,3196, a nullhipotézist nem tudjuk elutasítani.
+
+
+p = 0,5519, a nullhipotézist nem tudjuk elutasítani.
+
+
+p = 0,5519, a nullhipotézist elutasítjuk.
+
+
+p = 0,3196, a nullhipotézist elutasítjuk.
+
+Helyes válasz:
+
+p = 0,5519, a nullhipotézist nem tudjuk elutasítani.
+
+
+8. 3 / 3 pont
+
+
+Az alábbiak közül melyik igaz a hisztogramra?
+
+(nincs válasz)
+
+
+A relatív gyakorisági hisztogram a sûrûségfüggvény becslése.
+
+
+A relatív gyakorisági hisztogram az eloszlásfüggvény becslése.
+
+
+A relatív gyakorisági hisztogram függõleges tengelyén a tapasztalati kvantilisek szerepelnek.
+
+
+A relatív gyakorisági hisztogram vízszintes tengelyén az elméleti kvantilisek szerepelnek.
+
+
+A relatív gyakorisági hisztogram függõleges tengelyén a változó értékei szerepelnek.
+
+Helyes válasz:
+
+A relatív gyakorisági hisztogram a sûrûségfüggvény becslése.
+
+
+9. 5 / 5 pont
+Olvassuk be a „MASS” csomagból a „survey” adatbázist, mely egyetemi hallgatók kérdõíves felmérésének eredményét tartalmazza. A „Height” változó centiméterekben adja meg a hallgatók testmagasságát. Adjuk meg a felsõ (harmadik) kvartilist.
+
+Megoldás: 180 ± 1%
+
+
+10. 0 / 3 pont
+
+
+Egy új gyógyszer hatásának tesztelése érdekében megmérték 25 beteg szisztolés vérnyomását kezelés elõtt és után. Milyen statisztikai próbát használ annak eldöntésére, hogy a kezelés hatással volt-e az átlagos vérnyomásra vagy nem? Feltételezzük, hogy az adott próba feltételei teljesülnek.
+
+(nincs válasz)
+
+
+Egyszempontos ANOVA-t
+
+
+Páros t-próbát
+
+
+Kétmintás Kolmogorov-Szmirnov-próbát
+
+
+F-próbát
+Kétmintás t-próbát
+
+Helyes válasz:
+
+Páros t-próbát

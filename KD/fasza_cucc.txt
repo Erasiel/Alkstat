@@ -1,0 +1,212 @@
+1. Pontbecslés az emberek átlagos súlyára: mean(suly) = 74
+   Intervallumbecslés: 
+	Variancia: varsuly = var(suly)
+	Kiszámoljuk a szórást: szorassuly = sqrt(varsuly)
+	Medián: mediansuly = median(suly)
+	Hisztogram: hist(suly)
+
+Csoportonkénti alapstatisztikák:(hoki táblázat)
+
+Várható érték:
+aggregate(sys1,list(betegcsoport=csop),mean,na.rm=TRUE)
+Szórás:
+aggregate(sys1,list(betegcsoport=csop),sd,na.rm=TRUE)
+
+
+T-teszt:
+Várható érték becslése, H0: várható érték 150
+Egy mintánk van.
+t.test(sys1,mu=155,conf.level=0.95)
+
+két mintás F - próba: (hármas gyak) 
+Van két mintánk(két betegcsoport) az a hipotézis hogy a szórásuk egyenlõ
+10% = 0,1
+
+megcsinálja sys1.csop1 vektort
+sys1.csop1=sys1[(csop==1)]
+megcsinálja sys1.csop2 vektort
+sys1.csop2=sys1[(csop==2)]
+F próba:
+var.test(sys1.csop1,sys1.csop2,conf.level=0.9)
+
+p-value = 0.9062 > 0.1 tehát elfogadjuk 
+
+két mintás T - próba: hármasgyak
+Van két mintánk annak a várható értékét vizsgáljuk hogy egyenlõek e. Szükség van rá hogy a szórás egyenlõ legyen.
+Adjunk 90% megbízhatóságú intervallumot a két várható érték különbségére.
+p-value = 0.9328 > 0.1 : elfogadjuk
+
+90 percent confidence interval:
+ P(V(x;y))E[-3.79928;4.19928]=0.90
+
+______________________________________________________________gyak4
+
+Levene teszt:
+leveneTest(sys1,csop,center=mean) #levene Test
+#Nem sys1 változó szórását hasonlítjuk össze a csoportok szórásával
+#hanem a sys1 szórását a csoportokon belüli szórásokkal
+
+
+Egyszempontos ANOVA:
+oneway.test(sys1~factor(csop),var.equal=TRUE)
+
+
+Meg akarjuk nézni hogy egy csoporton belül hatásos volt e a gyógyszer, lekérdezzük a várható értéket, mintaátlagot és jól
+összehasonlítjuk pl:
+sys1.csop1=sys1[(csop==1)]
+sys2.csop1=sys2[(csop==1)]
+mean(sys2.csop1)
+[1] 160.4667
+> mean(sys2.csop1)
+[1] 151.7333
+
+kevesebb lett tehát hatásos a gyógyszer.
+
+
+Páros T próba, ugyan azt a csoportot csak azt vizsgálod h pl hatásos volt e a gyógyszer
+sys1.csop2=sys1[(csop==2)]
+sys2.csop2=sys2[(csop==2)]
+mean(sys1.csop2)
+mean(sys2.csop2)
+t.test(sys1.csop2,sys2.csop2,conf.level=0.95,paired=TRUE)
+
+
+_________________________________________________________________GYAK5
+
+
+Kockás példa, azt a nullhipotézst T próbával, hogy annak az esélye 1/6hogy 4est dobunk
+létrehozunk egy 20elemû vektort, amiben 14db 0 és 6db 4es van
+
+majd T próba
+
+attól függ hogy 14 darab 0 hogy kivesszük a táblából azt a részt ahol 4est dobutnk, a többit meg összeadjuk
+
+negyesek20=c(rep(0,14),rep(1,6)) #egy indikátor sorozatot definiálunk
+negyesek20
+#a rep 0,14 egy 14 komponensû vektort csinál, 0 komponensekkel
+#6x kaptam négyest és 14x kaptam nem négyest, ezt vizsgáljuk.
+table(negyesek20)
+t.test(negyesek20,mu=1/6,conf.level=0.9)
+#a p érték 0.22, nem túl vaskos, de p > mint alfa (alfa = 0.1)
+#Ho-t elfogadjuk
+
+#van egy 90%-os megbízgató konfidencia intervallumd.
+#P(P(4-es dobás)e[0,12 , 0,48)=0,9
+
+!!!1000 elemû vizsgálatnál csak 1 szûk intervallumot ad, mert sokkal megbízhatóbb kell elgyen
+#O(4-es dobás)e[0,28, 0,32])=0,9 Ezért elvetjük
+#20 dobásnál bármi lehet, 1000 dobásnál már dolgozik a nagyszámok törvénye!!!
+
+Khi^2 esetén, pl azt nézzük hogy szabályos e a dobokocka az alapján hogy van egy mintánk, pl 1000x dobtunk a kocekával
+
+szabályos itt means minden számnak a valsége 1/6od
+
+ha úgy kapjuk az adatokat hogy:
+dobas20=c(1,1,1,2,2,3,3,3,3,4,4,4,4,4,4,5,5,6,6,6)
+akkor elõtte csinálni kell egy gyakorisági táblát majd utána a Khi^2
+gyak.tablazat=table(dobas20)
+gyak.tablazat
+chisq.test(gyak.tablazat)
+
+__________________________________________________________________________GYAK6
+
+3. Függetlenség vizsgálat, 1. rész: cipõméret-magasság.
+
+   > cipomeret = emberek$cipomeret
+   > magassag = emberek$magassag
+   > model = aov(magassag~cipomeret)
+   > model = aov(magasasg~cipomeret)
+   > model
+   > summary(model)
+   > plot(magasasg,cipomeret)  // scatter-plot ábra.
+
+   Nem, cipõméret:
+
+   > nem = emberek$nem
+   > tbl = table(nem, cipomeret)
+   > tbl
+   cipomeret
+nem 36 38 39 40 41 42 43 44 45
+  1  0  0  1  1  3  5  1  4  2
+  2  1  1  1  0  0  0  0  0  0
+
+   > chisq.test(tbl)
+
+        Pearson's Chi-squared test
+
+data:  tbl
+X-squared = 16.0784, df = 8, p-value = 0.04127
+
+   - p = 0,04127 < 0,05, ezért H0-t elutasítjuk
+
+
+2. Férfi és nõ magasságának várható értéke megegyezik:
+
+  > magassag = emberek$magassag
+  > magassag.ferfi = emberek[(nem == 1),]$magassag
+  > magassag.no = emberek[(nem == 2),]$magassag
+  > magassag.no
+[1] 170 171 163
+  > t.test(magassag.ferfi,magassag.no)
+
+        Welch Two Sample t-test
+
+data:  magassag.ferfi and magassag.no
+t = 2.8402, df = 4.49, p-value = 0.04098
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+  0.5571824 17.0898764
+sample estimates:
+mean of x mean of y 
+ 176.8235  168.0000 
+
+  p = 0,04098 < 0,05 a nullhipotézist elutasítjuk
+
+
+
+
+
+-----------------------------------
+-----------------------------------
+-----------------------------------
+-----------------------------------
+-----------------------------------
+-----------------------------------
+-----------------------------------
+-----------------------------------
+-----------------------------------
+-----------------------------------
+Szerintem nem kell:
+Anova:
+Csoportonkénti várható értékek egyenlõsége,
+wss: Nem az összes csoport átlagát vonja ki belõle hanem csak a saját csoportjának átlagát második sor 2. szám
+bss: egyedi hatás, csoport átlagból a globál átlag. summaryba az elsõ sor 2. szám
+tss: SUM(xi-x|)^2 : xi: minden ember vérnyomásából kivonom az összes mintaátlagot négyzetreemelem és összadom. elõzõ
+kettõ összege
+
+summary -ban a elsõ sor 3. szám hogy hány százalékban okolható hogy melyik csopiba lett sorolva.
+p értéke pedig a 
+
+ANOVA TÁBLA:
+model=aov(sys1~factor(csop)) 
+model
+summary(model)
+
+Pearson korreláció, összehasonlítunk valamit valamivel pl a kezdõ fizetéstõl függ e az állandó fizetés
+
+mindig -1 és 1 közé esik:
+A korrelációs együttható tulajdonságai
+
+r mindig -1 és 1 között van.
+
+Ha a pontok nem fekszenek egy egyenes mentén, akkor azt mondjuk, hogy nincs korreláció közöttük (r=0), vagy gyenge korreláció van közöttük ( r közel van 0-hoz.). Ha a pontok egy egyenes mentén fekszenek, akkor r közel van +1-hez vagy -1-hez, ekkor azt mondjuk, hogy a két változó között szoros vagy magas korreláció van. Ha a pontok pontosan rajta vannak egy növekvo egyenesen, akkor r=1, ha pedig egy csökkeno egyenesen vannak pontosan rajta, akkor r=-1.
+cor(salary,salbegin,method=c("pearson"))
+
+intevallum:
+cor.test(salary,salbegin,method=c("pearson"),conf.level=0.95)
+#p érték nagyon alacsony, elvetjük, hogy a két változó független.
+#90% valséggel állíthatjuk, hogy a 
+#konfidencia intervallum P(v(x;y) e [0.85, 0.9]) ( 0.95)
+	
+
+################################szar

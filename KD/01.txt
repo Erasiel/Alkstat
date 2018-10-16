@@ -1,0 +1,158 @@
+
+1
+01020304050607080910
+bezárás
+1. 5 / 5 pont
+
+Olvassuk be a „MASS” csomagból a rákok adatait tartalmazó „crabs” adatbázist. 5%-os szignifikancia szinten teszteljük azt a nullhipotézist, hogy az „FL” változó varianciája azonos a hím és a nõstény egyedek esetén (sex == M vs sex == F). Az alábbi állítások közül melyik igaz?
+(nincs válasz)
+
+p = 0,5426 > 0,05, tehát 5%-os szinten elutasítjuk a varianciák azonosságára vonatkozó nullhipotézist.
+
+p = 0,8326 > 0,05, tehát a varianciák azonosságára vonatkozó nullhipotézist 5%-os szignifikancia szinten elutasítjuk.
+
+p = 0,8326 > 0,05, tehát a varianciák azonosságára vonatkozó nullhipotézist nem tudjuk elutasítani 5%-os szignifikancia szinten.
+
+p = 0,5426 > 0,05, tehát a varianciák azonosságára vonatkozó nullhipotézist 5%-os szignifikancia szinten nem tudjuk elutasítani.
+
+p = 0,8326 < 0,9583, tehát elutasítjuk a varianciák azonosságára vonatkozó nullhipotézist.
+Helyes válasz:
+
+p = 0,8326 > 0,05, tehát a varianciák azonosságára vonatkozó nullhipotézist nem tudjuk elutasítani 5%-os szignifikancia szinten.
+2. 3 / 3 pont
+
+Mikor követünk el másodfajú hibát?
+(nincs válasz)
+
+Ha szignifikáns különbséget állapítunk meg.
+
+Ha megtartjuk a hamis nullhipotézist.
+
+Ha elutasítjuk a hamis nullhipotézist.
+
+Ha elutasítjuk az igaz nullhipotézist.
+
+Ha megtartjuk az igaz nullhipotézist.
+Helyes válasz:
+
+Ha megtartjuk a hamis nullhipotézist.
+3. 3 / 3 pont
+
+Az alábbiak közül melyik statisztikai próba lehet alkalmas kettõnél több, független, normális eloszlású változó várható értékének összehasonlítására?
+(nincs válasz)
+
+Binomiális próba
+
+Páros t-próba
+
+Kétmintás Kolmogorov-Szmirnov-próba
+
+Egyszempontos ANOVA
+
+Kétmintás t-próba
+Helyes válasz:
+
+Egyszempontos ANOVA
+4. 3 / 3 pont
+
+Két normális eloszlású populáció varianciájának összehasonlítására milyen statisztikai próbát használ?
+(nincs válasz)
+
+F-próbát
+
+Páros t-próbát
+
+Kétmintás t-próbát
+
+Egyszempontos ANOVA-t
+
+Binomiális próbát
+Helyes válasz:
+
+F-próbát
+5. 0 / 5 pont
+
+Olvassuk be a „MASS” csomagból a rákok adatait tartalmazó „crabs” adatbázist. 5%-os szignifikancia szinten teszteljük azt a nullhipotézist, hogy az „FL” változó eloszlása azonos a hím és a nõstény egyedek esetén (sex == M vs sex == F). 
+
+0,9062 , tehát nem tudjuk kimutatni, hogy a két eloszlás szignifikánsan különbözõ.
+(nincs válasz)
+Egyik állítás sem igaz.
+Az elsõ állítás igaz, a második hamis.
+Az elsõ állítás hamis, a második igaz.
+Mindkét állítás igaz, de nincs összefüggés köztük.
+Mindkét állítás igaz és összefüggés van köztük.
+Helyes válasz:
+Mindkét állítás igaz és összefüggés van köztük.
+6. 3 / 3 pont
+
+Az egymintás t-próba nullhipotézise:
+(nincs válasz)
+
+A vizsgált változó várható értéke egy adott szám.
+
+A két változó eloszlása azonos.
+
+A vizsgált változó eloszlása egy hipotetikus eloszlással azonos.
+
+A két változó várható értéke azonos.
+
+A két változó szórása azonos.
+Helyes válasz:
+
+A vizsgált változó várható értéke egy adott szám.
+7. 5 / 5 pont
+
+Olvassuk be a „MASS” csomagból a „survey” adatbázist, mely egyetemi hallgatók kérdõíves felmérésének eredményét tartalmazza. Hány fiú szerepel az adatbázisban (Sex == Male)?
+118
+Megoldás: 118
+8. 3 / 3 pont
+
+2 példa diszkrét változóra
+(nincs válasz)
+
+Életkor és iskolai végzettség.
+
+Életkor és nem.
+
+Vércsoport és testtömeg.
+
+Vércsoport és iskolai végzettség.
+
+Testtömeg és életkor.
+Helyes válasz:
+
+Vércsoport és iskolai végzettség.
+9. 5 / 5 pont
+
+Olvassuk be a „MASS” csomagból a „birthwt” adatbázist, mely egy, az alacsony születési súly kockázati tényezõit vizsgáló kutatás eredményét tartalmazza. Vizsgáljuk a születési súlyt („bwt” változó) aszerint, hogy az anya dohányzott-e vagy nem („smoke”) változó. 5%-os szignifikancia szinten teszteljük azt a nullhipotézist, hogy az átlagos születési súly azonos a terhesség alatt dohányzó és a nem dohányzó (smoke == 0 vs smoke == 1) anyák esetén. Tételezzük fel a csoportonkénti varianciák azonosságát és normális eloszlást. Az alábbi állítások közül melyik igaz?
+(nincs válasz)
+
+p = 0,008667, a nullhipotézist nem tudjuk elutasítani.
+
+p = 0,007003, a nullhipotézist elutasítjuk.
+
+p = 0,2254, a nullhipotézist nem tudjuk elutasítani.
+
+p = 0,2254, a nullhipotézist elutasítjuk.
+
+p = 0,007003, a nullhipotézist nem tudjuk elutasítani.
+
+p = 0,008667, a nullhipotézist elutasítjuk.
+Helyes válasz:
+
+p = 0,008667, a nullhipotézist elutasítjuk.
+10. 5 / 5 pont
+
+Egy adott növény háromfajta színben fordul elõ, van piros, rózsaszín és fehér változata. Genetikusok azt sejtik, hogy a szín recesszív módon öröklõdik. Ennek ellenõrzésére piros és fehér színû növényeket házasítanak össze egymással, és megvizsgálják, hogy az utódnövények milyen színûek. Recesszív öröklõdés esetén egy-egy utódnövény 0,25; 0,5 illetve 0,25 valószínûséggel lesz piros, rózsaszín illetve fehér. A kikelt utódnövények közül 30 lett piros, 50 rózsaszín és 35 fehér. Teszteljük 5 százalékos szignifikancia szinten azt a nullhipotézist, hogy a szín recesszíven öröklõdik.
+(nincs válasz)
+
+Most p = 0,3 < 0,95, ezért a nullhipotézist elutasítjuk.
+
+A próbastatisztika értéke nagyobb, mint a szignifikancia szint, ezért a nullhipotézist elutasítjuk.
+
+Most p = 0,3 > 0,05, ezért a nullhipotézist nem tudjuk elutasítani.
+
+A mintaméret túl alacsony, ezért nem tudunk megbízható döntést hozni.
+Helyes válasz:
+
+Most p = 0,3 > 0,05, ezért a nullhipotézist nem tudjuk elutasítani.
