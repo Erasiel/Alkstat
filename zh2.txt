@@ -1,0 +1,60 @@
+Függetlenségvizsgálat (kszí és éta)
+Lineáris regresszió (2/több változó)
+PCA (sok --> kevés)
+
+aka többváltozós statisztikai eljárások
+
+Függetlenségvizsgálat:
+H0: kszí és éta függetlenek
+kérdések:
+	Független-e X Y-tól?
+	Igaz-e, hogy X többet cuccol, mint Y?
+kulcskérdés: milyen mérési szintűek a változók?
+	eset no1: két diszkrét változónk van (könnyű összeszámolni az értékeket) pl.: iskolai végzettség
+		próba: khí^2 próba
+		kszí és éta --> kereszttábla (megfigyelt gyakoriságok / függetlenség esetén elvárt), mennyire nagy a különbség?
+		döntés: csak a p-value számít
+		cellánkénti elemszám kicsi: az eredmények félrevezetőek lehetnek...
+	eset no2: 1 diszkrét, 1 NEM diszkrét változó pl.: iskolai végzettség - jövedelem // nem - testsúly
+		próba: oneway anova
+		diszkrét változó mentén csoportokat képez, csoportokban vizsgálja a folytonos változó megoszlását, megnézi, hogy a csoporton belül megegyezik-e
+		0. lépés: szóráshomogenitás fennáll-e (levene-test)
+		1. lépés: boxplot (kombózható a 0. lépéssel)
+		2. lépés: anova
+		3. lépés: kiértékelés
+	eset no3: 2 nem diszkrét változónk van pl.: kezdőjövedelem - végső jövedelem
+		próba: korrelációs teszt
+		H0: korreláció ksí és éta között == 0
+		korreláció = kovariancia / szórások szorzata
+		kovariancia = együttmozgás
+		korrelációs együttható: a kapcsolat erőssége és iránya, ÉK: [-1, 1] (előjel a kapcsolat iránya, abszolútértékek a kapcsolat erősségét)
+		pl.: r = -0.8 (erős negatív kapcsolat): ahogy növekszik kszí értéke, úgy csökke éta értéke
+		0. lépés: plot
+		1. lépés: korrelációs együttható számolása
+		2. lépés: korrelációs teszt
+		3. lépés: kiértékelés
+
+
+Lineáris regresszió:
+>>Korrelációhoz erősen kapcsolódik
+CSAK akkor végezzük, ha H0 korrelációra nem igaz
+Lineáris regresszió lényege: éta változó hogyan alakul ki
+
+kérdés:
+	ponthalmazra legjobban illeszkedő egyenes egyenlete
+jól illeszkedő egyenes: az eltérések (hibatagok) szórása minimális
+
+menete:
+	0: plot
+	1: korrelációs teszt
+	2: lineáris modell
+	3: kiértékelés (nem csak p, hanem r-squared mutató mentén is --> ha r-squared < 0.5, nem jó a modell, VÉGE)
+
+Főkomponens-analízis (PCA)
+cél: adatredukció (legyen lényegesen kevesebb változó), leginformatívabb kép (megmagyarázott varianciák aránya)
+összefüggések mentén redukáljuk a változókat: erősen összefüggő változók helyett látens változók
+leginformatívabb kép: az összvariancia a lehető legjobb arányban maradjon meg
+
+typic kérdés:
+	hány változó kell, hogy blablabla
+	loadings-ok (faktorsúlyok): új komponens változói milyen súllyal ülnek a komponensen (csak abszolút számokra vagyunk kíváncsiak)
